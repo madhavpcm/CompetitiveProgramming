@@ -1,4 +1,9 @@
 *
 !*/
 !*.*
-
+.vscode
+input.*
+output.*
+log.*
+error.*
+*.out

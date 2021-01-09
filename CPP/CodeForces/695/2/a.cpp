@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <map>
 #include <time.h>
 
 
@@ -27,7 +28,7 @@ using namespace std;
 #define ss(n) scanf("%s",n)
 #define pnl printf("\n")
 #define REP(i,n) for(int i=0;i<(n);i++)
-#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define FOR(i,a,b) for(unsigned long long i=(a);i<(b);i++)
 #define FORR(i,n) for(int i=(n);i>=0;i--)
 #define DB(x) cout<<"\n"<<#x<<" = "<<(x)<<"\n";
 #define CL(a,b) memset(a,b,sizeof(a))
@@ -41,26 +42,56 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+size_t VectorToInt(vector<int> &v)
 {
+size_t result = 0;
+for (auto d : v)  
+{
+    result = result * 10 + d;
+}
+return result;
+}
+
+ull calc( vector<int> &v , size_t ind)
+{
+    for( size_t i = 0 ; i< v.size() ; i++){
+        v[i]= abs(v[i] - v[ind]) % 10;
+    }
+    ull rz = VectorToInt(v);
+    
+    return rz;
+}
+ull test_case(size_t &n)
+{
+    vector<int> v(n,0);
+    ull mx = 0;
+    for(int i = 0 ;  i < 10 ;i++){
+        std::transform(std::begin(v),std::end(v),std::begin(v),[](int x){return x+1;});
+
+        for(size_t j = 0 ; i< n ; j++){
+            ull k =calc(v,j);
+
+            if(k > mx){
+                mx= k;
+            }
+        }
+    }
+    return mx;
+
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    int t;
+ 
+    int t;size_t n;
     scanf("%d",&t);
     while(t--)
     {
-        test_case();
+        cin>>n;   
+
+        cout<<test_case(n)<<endl;
 
     }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+
     
     return 0;
 }//end main*

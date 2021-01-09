@@ -41,8 +41,9 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+void test_case(int n)
 {
+    vector<int> a(n,0);
 }
 int main()
 {
