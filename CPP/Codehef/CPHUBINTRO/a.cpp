@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <cstdlib>
 #include <cstdio>
-#include <cstring>
+#include <string>
 #include <time.h>
 
 
@@ -39,28 +39,47 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
-//end refresh
-void test_case()
+vector<ull> fct(20,0);
+unsigned long long factorial(unsigned long long n) 
 {
+    if (n == 0)
+       return 1;
+    if (fct[n] != 0){
+        return fct[n];
+    }
+    else{
+        fct[n] =n * factorial(n - 1);
+        return fct[n];
+    }
+}
+//end refresh
+ull test_case(string str)
+{
+    if (str.size( ) >=6){
+        return (factorial(str.size()) - 2*factorial(str.size()-2)) - factorial(str.size() -4);
+    }
+    else if (str.find("k") != string::npos && str.find("a") != string::npos && str.find("r") != string::npos){
+        return (factorial(str.size()) - factorial(str.size()-2));
+    }
+    else if (str.find("s") != string::npos && str.find("h") != string::npos && str.find("i") != string::npos){
+        return (factorial(str.size()) - factorial(str.size()-2));
+    }
+    else {
+        return factorial(str.size());
+    }
 }
 int main()
-{
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
+{   
+  
     int t;
-    scanf("%d",&t);
+    scanf("%d",&t);string str;
     while(t--)
     {
-        test_case();
+        cin>>str;
+        cout<<test_case(str)<<endl;
 
     }//end while
     
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
-    
+
     return 0;
 }//end main*

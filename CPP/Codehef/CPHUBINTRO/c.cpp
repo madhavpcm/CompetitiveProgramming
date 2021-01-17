@@ -5,9 +5,9 @@
 #include <numeric>
 #include <vector>
 #include <stdint.h>
-#include <cstdlib>
+#include <limits.h>
 #include <cstdio>
-#include <cstring>
+#include <string>
 #include <time.h>
 
 
@@ -39,28 +39,38 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
+ull ops(vector<ull> a){
 
-//end refresh
-void test_case()
-{
 }
+//end refresh
+int test_case(vector<int> a){
+    //ull Min = ULLONG_MAX;
+    ull Xor=0;ull sum =0;
+    for(auto & i :a){
+        Xor = Xor ^ i;
+        sum+=i;
+    };
+    return Xor;
+
+}
+
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
-    scanf("%d",&t);
+    scanf("%d",&t);int n;
     while(t--)
-    {
-        test_case();
+    {   
+        cin >> n;
+        vector<int> a(n);
+        for(auto &i : a){
+            cin>>i;
+        }
+        cout<<test_case(a)<<endl;
 
     }//end while
     
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+
     
     return 0;
 }//end main*

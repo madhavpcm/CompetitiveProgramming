@@ -5,7 +5,7 @@
 #include <numeric>
 #include <vector>
 #include <stdint.h>
-#include <cstdlib>
+#include <limits.h>
 #include <cstdio>
 #include <cstring>
 #include <time.h>
@@ -46,21 +46,37 @@ void test_case()
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     scanf("%d",&t);
+    int n ; int d; int min1, min2;int a;int mx=INT_MIN; bool flag = true;
+    min1 =min2 = INT_MAX;
+
     while(t--)
     {
-        test_case();
+        scanf("%d %d",&n,&d);
+        while(n--){
+           scanf("%d",&a);
+           if(a> d) flag=false;
+           if (a <= min1)
+            {
+                min2 = min1;
+                min1 = a;
+            }
+            else if (a < min2)
+            {
+                min2 = a;
+            }
+        }
+        if (min1 + min2 <= d || flag){
+            printf("YES\n");
+        }   
+        else{
+            printf("NO\n");
+        }
+        
 
     }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
-    
+
     return 0;
-}//end main*
+}//end main*#include <iostream>

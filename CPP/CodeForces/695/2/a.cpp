@@ -10,6 +10,7 @@
 #include <cstring>
 #include <map>
 #include <time.h>
+#include <stdio.h>
 
 
 using namespace std;
@@ -63,12 +64,13 @@ ull calc( vector<int> &v , size_t ind)
 }
 ull test_case(size_t &n)
 {
-    vector<int> v(n,0);
+    vector<int> v;
     ull mx = 0;
     for(int i = 0 ;  i < 10 ;i++){
-        std::transform(std::begin(v),std::end(v),std::begin(v),[](int x){return x+1;});
+        v.clear();
+        v.resize(n , i);
 
-        for(size_t j = 0 ; i< n ; j++){
+        for(size_t j = 0 ; j< n ; j++){
             ull k =calc(v,j);
 
             if(k > mx){
@@ -81,9 +83,14 @@ ull test_case(size_t &n)
 }
 int main()
 {
+    #ifdef __linux__
+        freopen("intput.txt" , "r", stdin);freopen("output.txt" , "w", stdout);
+        freopen("log.txt" , "w", stderr) ;
+    #endif
  
     int t;size_t n;
     scanf("%d",&t);
+
     while(t--)
     {
         cin>>n;   
@@ -92,6 +99,8 @@ int main()
 
     }//end while
 
-    
+    #ifdef __linux__
+        cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
     return 0;
 }//end main*

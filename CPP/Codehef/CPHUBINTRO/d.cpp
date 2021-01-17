@@ -7,9 +7,9 @@
 #include <stdint.h>
 #include <cstdlib>
 #include <cstdio>
-#include <cstring>
+#include <map>
 #include <time.h>
-
+#include<set>
 
 using namespace std;
 #define MOD 1000000007LL
@@ -41,26 +41,41 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
+class student{
+    public:
+    set<int> relations;
+
+};
 void test_case()
 {
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    int t;
-    scanf("%d",&t);
-    while(t--)
-    {
-        test_case();
 
-    }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+    int n;int m;
+    scanf("%d %d",&n , &m);
+    int a , b;
+    scanf("%d %d", &a ,&b);
+    vector<set<int>> grp(1);
+    grp[0].insert(a);grp[0].insert(b);   
+    m--;
+    while(m--){
+            scanf("%d %d", &a ,&b);
+
+        for(auto & i : grp){
+            if (i.find(a) == i.end() ||i.find(b) == i.end()){
+                grp.push_back({a,b});
+            }
+            else{
+                i.insert(a);
+                i.insert(b);
+            }
+        }
+    }ull product=1;
+    for(auto &i : grp){
+        product*=i.size();
+    }
+    cout<<product;
     
     return 0;
 }//end main*

@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <cstdlib>
 #include <cstdio>
-#include <cstring>
+#include <string>
 #include <time.h>
 
 
@@ -51,9 +51,10 @@ int main()
     freopen("log.txt", "w", stderr);
     #endif
     int t;
-    scanf("%d",&t);
+    scanf("%d",&t); string str1;string str2;
     while(t--)
     {
+        scanf("%s %s",str1,str2);
         test_case();
 
     }//end while
