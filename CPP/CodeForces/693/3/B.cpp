@@ -13,27 +13,17 @@ using namespace std;
 
 //end refresh
 string solve(int count_1, int count_2 ){
-
- 
-    if( count_1  > count_2 ){
-        count_1 =count_1 - count_2;
-        if (count_1 %2 == 0)
-        { return "YES"; }
-        else {
-            return "NO";
-        }    
+    if((count_1 + count_2*2) % 2 != 0 ){
+        return "NO";
     }
-    if( count_2  > count_1 ){
-        count_2 = count_2 - count_1;
-        if (count_2 %2 == 0){ return "YES"; }
-        else {return "NO";}
-        }
-    
-    if (count_1 == count_2 ){
-        if (count_1 %2 == 0){ return "YES";}
-
+    else {
+        int sum = (count_1 + 2*count_2 )/ 2 ;
+        if (sum % 2 == 0 || sum%2 == 1 && count_1 !=0)
+            return "YES";
+        else
+            return
+                   "NO";
     }
-    return "NO";
 }   
 
 

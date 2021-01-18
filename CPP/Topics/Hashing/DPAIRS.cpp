@@ -43,24 +43,30 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
+
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    int t;
-    scanf("%d",&t);
-    while(t--)
-    {
-        test_case();
 
-    }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+    int64_t n,m;
+    scanf("%lld %lld",&n,&m);
+    vector<int64_t> a(n),b(m);
+
+    for(auto &i: a)cin>>i;
+    for(auto &i: b)cin>>i;
+
+    vector<pair<int,int>> indices;
+    set<int64_t> dist_sum;
+    for(int i =0 ; i < n; i++){
+        for(int j =0 ; j < m ; j++){
+            if (dist_sum.insert(a[i] + b[j]).second){
+                if ( dist_sum.size() <= n+m-1)
+                    cout<<i<<" "<<j<<endl;                
+            }
+        }
+    }
+
+
     
     return 0;
 }//end main*

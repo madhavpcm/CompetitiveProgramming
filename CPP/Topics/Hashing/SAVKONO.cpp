@@ -41,26 +41,43 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+int64_t test_case(int n,long z)
 {
+    int x;long c=0;
+    vector<long> HS(10003,0);
+    for(int i = 0 ; i < n ; i++){
+        cin>>x;
+        HS[x]++;
+    }
+    for (int64_t i = 10002 ; i >0 ; i-- ){
+        while(HS[i] && z>0){
+            z -= i;
+            HS[i/2]++;
+            HS[i]--;
+            c++;
+        }
+        if(z<=0)break;
+    }
+    if(z<=0)
+        return c;
+    else 
+        return -1;
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    int t;
+
+    int t;int n;long z;
     scanf("%d",&t);
     while(t--)
     {
-        test_case();
+        cin>>n;
+        cin>>z;
+        auto res = test_case(n,z);
+        res==-1 ? cout<<"Evacuate"<<endl : cout<<res<<endl ;
 
     }//end while
     
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+
     
     return 0;
 }//end main*
