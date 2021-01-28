@@ -19,7 +19,7 @@ string test_case(){
 }
 int main(){
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-
+    int32_t x;
     int t;cin>>t;
     while(t--){
         auto start= chrono::high_resolution_clock::now();
