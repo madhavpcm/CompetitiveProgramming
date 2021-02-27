@@ -46,11 +46,7 @@ void test_case()
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    
+
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
@@ -59,10 +55,7 @@ int main()
         test_case();
 
     }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+
     
     return 0;
 }//end main*

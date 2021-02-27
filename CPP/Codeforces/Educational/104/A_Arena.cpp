@@ -43,15 +43,26 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
+    int n;cin>>n;
+    vector<int> v(n);
+    for(int i=0; i< n; i++){
+        cin>>v[i];
+    }
+    uint32_t count=0;
+    for(int i =0; i < n ; i++){
+        for(int j =0; j< n; j++){
+            if( v[j] < v[i]){
+                count++;break;
+            }
+        }
+    }
+    cout<<count<<endl;
+
 }
 int main()
 {
-    #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
-    #endif
-    
-    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+
+
     int t;
     cin>>t;
     while(t--)
@@ -59,10 +70,7 @@ int main()
         test_case();
 
     }//end while
-    
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+
     
     return 0;
 }//end main*
