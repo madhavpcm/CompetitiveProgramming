@@ -9,7 +9,7 @@
 #include <map>
 #include <string>
 #include <time.h>
-
+#include <unordered_map>
 
 using namespace std;
 #define MOD 1000000007LL
@@ -43,26 +43,42 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
+    int n,m;
+    cin>>n>>m;
+    unordered_map<int , int> a;
+    int res=0;
+   
+    for(int i=0 ; i < n; i++){
+        int64_t x;
+        cin>>x;
+        a[x%m]++;
+
+    }
+    if(a[0] != 0)res++;
+   // sort(a.begin() , a.end());
+    for(int i=1 ; i<= m/2 ;i++){
+        if(a[i]!=0 && a[i]==a[m-i]  )
+            res++;
+        else
+            res+= abs(a[i] - a[m-i]);
+    }
+    cout<<res<<endl;
 }
 int main()
 {
-
+    
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int64_t n;
-    cin>>n;
-    int64_t res;
-    int64_t k=n/2;
-    if ( ((n>>1)<<1) ==n ){
-        res=(k+1)*(k+1);
-    }else{
-        res=(k+1)*(k+2)*2;
-    }
-    if(res<=k){
-        cout<<res<<" "<<"YES";
-    }
-    else{
-        cout<<res<<" "<<"NO";
-    }
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        test_case();
+
+    }//end while
+    
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
     
     return 0;
 }//end main*

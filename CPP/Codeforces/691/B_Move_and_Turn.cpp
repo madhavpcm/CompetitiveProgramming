@@ -43,26 +43,22 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
+
 }
 int main()
 {
-
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int64_t n;
+    int n;
     cin>>n;
-    int64_t res;
-    int64_t k=n/2;
+    int k=n/2;
     if ( ((n>>1)<<1) ==n ){
-        res=(k+1)*(k+1);
+        cout<<(k+1)*(k+1);
     }else{
-        res=(k+1)*(k+2)*2;
+        cout<<(k+1)*(k+2)*2;
     }
-    if(res<=k){
-        cout<<res<<" "<<"YES";
-    }
-    else{
-        cout<<res<<" "<<"NO";
-    }
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
     
     return 0;
 }//end main*

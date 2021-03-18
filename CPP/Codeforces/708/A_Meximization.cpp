@@ -39,30 +39,45 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
 //end refresh
 void test_case()
 {
+    int n;cin>>n;
+    vector<int> a(n);
+    vector<int> dup;
+    for(auto&i : a){cin>>i;}
+    sort(a.begin(),a.end());
+
+    for(int i=0 ; i< n; i++){
+        if(i>0){
+            if(a[i]!=a[i-1]){
+                cout<<a[i]<<" ";
+            }else{
+                dup.push_back(a[i]);
+            }
+        }
+        else{
+            cout<<a[i]<<" ";
+        }
+    }
+    for(auto&i : dup){
+        cout<<i<<" ";
+    }
+    cout<<endl;
 }
 int main()
 {
-
+   
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int64_t n;
-    cin>>n;
-    int64_t res;
-    int64_t k=n/2;
-    if ( ((n>>1)<<1) ==n ){
-        res=(k+1)*(k+1);
-    }else{
-        res=(k+1)*(k+2)*2;
-    }
-    if(res<=k){
-        cout<<res<<" "<<"YES";
-    }
-    else{
-        cout<<res<<" "<<"NO";
-    }
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        test_case();
+
+    }//end while
+    
+    
     
     return 0;
 }//end main*
