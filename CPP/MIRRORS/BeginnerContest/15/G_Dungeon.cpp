@@ -41,31 +41,35 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+bool test_case()
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    int a,b,c;
+    cin>>a>>b>>c;
+    if((a+b+c)%9 != 0 || min({a,b,c}) <(a+b+c)/9 ){
+        return false;
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
+    
+    
+    return true;
 }
 int main()
 {
-    
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
     while(t--)
     {
-        test_case();
+        if(test_case()){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
 
     }//end while
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

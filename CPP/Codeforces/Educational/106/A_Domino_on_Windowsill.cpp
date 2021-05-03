@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <time.h>
+#include <unordered_set>
 
 
 using namespace std;
@@ -40,19 +41,20 @@ ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
-//end refresh
+
 void test_case()
 {
-    int n, k;
-    cin>>n>>k;
+    int n,k1,k2;
+    cin>>n>>k1>>k2;
 
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    int w,b;
+    cin>>w>>b;
+
+    if(2*w <= k1 + k2 && 2*b <= 2*n - k1 -k2){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
 }
 int main()
 {
@@ -66,6 +68,9 @@ int main()
 
     }//end while
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

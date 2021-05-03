@@ -43,29 +43,43 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
-    }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
 }
 int main()
 {
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        test_case();
-
-    }//end while
+    int n,m;int s;
+    cin>>n>>m>>s;
+    uint64_t count=0;
+    vector<set<int>> g(n+1);
+    vector<uint64_t> stud(m+1,0);
+    vector<int64_t> group_curr(m+1);
+    while(s--){
+        int t,x,y;
+        cin>>t>>x>>y;
+        if(t==1){
+            stud[x] -= group_cur
+            g[y].insert(x);
+            
+        }
+        if(t==2){
+            g[y].erase(x);
+            
+        }
+        if(t==3){
+            for(auto&i : g[y]){
+                if(i!=x)
+                    stud[i]++;
+            }
+        }
+    }
+    for(int i=1 ;i<=m ;i++){
+        cout<<stud[i]<<endl;
+    }
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

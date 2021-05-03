@@ -1,0 +1,15 @@
+7/4/21
+Use callgrind to profile c / cpp program . //10x overhead. 
+Usage :valgrind --tool=callgrind [callgrind options] your-program [program options]
+
+/usr/bin/time for time elapsed instead of chrono etc.
+static variables property
+-------------------------
+Static variables after cpp 11 is thread safe. Meaning the compiler makes sure that the static variable is valid for each creation of the variable. So Inside a class or strcut if a static variable exists, always store its reference and use this reference for calculation in the program. Reduces alot of overhead.
+
+
+std::endl
+---------
+std::endl == '\n' << std::flush; 
+flush has high performance overhead and can be used at the end of the program. use \n in characters instead.
+

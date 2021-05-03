@@ -41,31 +41,36 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+bool ifodd(int n)
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    int count=0;
+    while(n){
+        n/=10;
+        count++;
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
+    if(count%2==1){
+        return true;
+    }else{
+        return false;
+    }
 }
 int main()
 {
     
-    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        test_case();
-
-    }//end while
     
-
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    int n;
+    cin>>n;
+    int count=0;
+    for(int i=1; i<=n ;i++){
+        if(ifodd(i)){
+            count++;
+        }
+    }
+    cout<<count;
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

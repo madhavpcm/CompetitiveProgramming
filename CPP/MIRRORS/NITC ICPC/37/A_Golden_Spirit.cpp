@@ -43,19 +43,13 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
-    }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
 }
 int main()
 {
+    #ifdef __linux__
+    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+    freopen("log.txt", "w", stderr);
+    #endif
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
@@ -66,6 +60,9 @@ int main()
 
     }//end while
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

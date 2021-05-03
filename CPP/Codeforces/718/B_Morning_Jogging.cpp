@@ -43,29 +43,47 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    int m,n;
+    cin>>n>>m;
+    bool order=true;
+    vector<vector<int>> paths(n,vector<int>(m));
+    vector<pair<int, pair<int,int>>> id;
+    for(int i=0 ; i <n ;i ++){
+        for(int j=0; j< m ;j++){
+            cin>>paths[i][j];
+        }
+        sort(paths[i].begin(),paths[i].end());
+        for(int j =0; j< m ;j++){
+            id.push_back({paths[i][j], {i,j}});
+        }
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
+    sort(id.begin(), id.end());
+    for(int i =m-1 ; i>= 0; i--){
+        swap(paths[id[i].second.first][i], paths[id[i].second.first][id[i].second.second]);
+    }
+    for(int i =0 ; i< n; i++){
+        for(int j=0; j< m ; j++){
+            cout<<paths[i][j]<<' ';
+        }
+        cout<<'\n';
+    }
 }
 int main()
 {
+
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
-    cin>>t;
+    cin>>t; 
     while(t--)
     {
         test_case();
 
     }//end while
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

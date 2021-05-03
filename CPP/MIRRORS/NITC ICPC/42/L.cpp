@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <time.h>
+#include <unordered_map>
 
 
 using namespace std;
@@ -39,23 +40,34 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
+int64_t A,B;
 
 //end refresh
 void test_case()
 {
-    int n, k;
-    cin>>n>>k;
+    int64_t n;
+    cin>>A>>B>>n;
+    int sign=1;
 
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    if((n/3)%2==1){
+        sign=-1;
+    }else{
+        sign=1;
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
+
+    switch(n%3){
+        case 0:cout<<((B-A)*sign)%MOD<<endl;break;
+
+        case 1: cout<<(A*sign)%MOD<<endl;break;
+
+        case 2: cout<<(B*sign)%MOD<<endl;break;
+
+    }
+    
 }
 int main()
 {
+    
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
@@ -66,6 +78,9 @@ int main()
 
     }//end while
     
-
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
 }//end main*

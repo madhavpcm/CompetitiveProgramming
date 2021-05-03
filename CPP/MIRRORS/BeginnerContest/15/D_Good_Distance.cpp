@@ -41,31 +41,42 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-void test_case()
+double dist(vector<int> & a, vector<int> & b)
 {
-    int n, k;
-    cin>>n>>k;
-
-    cout<<n-(k+1)/2<<endl;
-    for(int i=k+1; i<=n; i++){
-        cout<<i<<" ";
+    int n=a.size();
+    int64_t res=0;
+    for(int i=0; i< n; i++){
+        res+=(a[i]-b[i])*(a[i]-b[i]);
     }
-    for(int i=(k+1)/2 ; i< k; i++)
-        cout<<i<<" ";
-    cout<<endl;
+    return sqrt(res);
 }
 int main()
 {
+
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        test_case();
+    int n ,d;
+    cin>>n>>d;
+    vector<vector<int>> a(n,std::vector<int>(d));
+    for(auto&i :a){
+        for(auto&j :i){
+            cin>>j;
+        }
+    }int count=0;
+    for(int i=0 ; i < n;i++){
+        for(int j =i+1; j< n; j++){
+            double res1=dist(a[i],a[j]);
+            int64_t res2=res1;
 
-    }//end while
+            if(res1-res2 == 0){
+                count++;
+            }
+        }
+    }
+    cout<<count;
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
     
-
     return 0;
 }//end main*
