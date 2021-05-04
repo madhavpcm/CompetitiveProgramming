@@ -41,25 +41,18 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-
-bool test_case()
+void test_case()
 {
-    int n;cin>>n;
-    
-    vector<int> a(n+1,0);
-    
-    for(int i=1; i<=n; i++){
-        int inp;cin>>inp;
-        a[i]=a[i-1]^inp;
-    }
-    bool res=!a[n];
-    for(int i=1 ; i <= n ; i++){
-        for(int j=i+1; j< n; j++){
-            res |= (a[i]==(a[i]^a[j]) && a[i]==(a[j]^a[n]));
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    vector<string> all;
+    for(int i =0 ; i< n ; i++){
+        for(int j=1 ; j<= n-i ;j++){
+            all.push_back(s.substr(i,j))
         }
     }
-    return res;
-    
 }
 int main()
 {
@@ -68,11 +61,7 @@ int main()
     cin>>t;
     while(t--)
     {
-        if(test_case()){
-            cout<<"YES\n";
-        }else{
-            cout<<"NO\n";
-        }
+        test_case();
 
     }//end while
     

@@ -41,24 +41,51 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-
-bool test_case()
+void test_case()
 {
-    int n;cin>>n;
-    
-    vector<int> a(n+1,0);
-    
-    for(int i=1; i<=n; i++){
-        int inp;cin>>inp;
-        a[i]=a[i-1]^inp;
-    }
-    bool res=!a[n];
-    for(int i=1 ; i <= n ; i++){
-        for(int j=i+1; j< n; j++){
-            res |= (a[i]==(a[i]^a[j]) && a[i]==(a[j]^a[n]));
+    int n;
+    cin>>n;
+    vector<int> odd;
+    vector<int> even;
+
+    for(int i =0 ; i< n ;i++){
+        int x;cin>>x;
+        if(x%2){
+            odd.emplace_back(x);
+        }else{
+            even.emplace_back(x);
         }
     }
-    return res;
+    bool odd_f=0,even_f=0;
+
+
+    size_t odd_s=odd.size();
+    size_t even_s=even.size();
+    odd_f=(odd_s%2);
+    even_f=(even_s%2);
+    for(int i=0 ; i<odd_s; i++){
+        if(i==odd_s-1){
+            if(!odd_f)
+                cout<<odd[i]<<' ';
+        }
+        else{
+            cout<<odd[i]<<' ';
+        }
+    }if(odd_f){
+        cout<<odd[odd_s-1]<<' ';
+    }
+    for(int i=0 ; i<even_s; i++){
+        if(i==even_s-1){
+            if(!even_f)
+                cout<<even[i]<<' ';
+        }
+        else{
+            cout<<even[i]<<' ';
+        }
+    }if(even_f){
+        cout<<even[even_s-1]<<' ';
+    }
+    
     
 }
 int main()
@@ -68,11 +95,8 @@ int main()
     cin>>t;
     while(t--)
     {
-        if(test_case()){
-            cout<<"YES\n";
-        }else{
-            cout<<"NO\n";
-        }
+        test_case();
+        cout<<'\n';
 
     }//end while
     

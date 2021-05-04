@@ -39,40 +39,38 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
+vector<bool> sqr(10001,0);
+void setb(){
+    for(int i=1; i <= 100 ;i++){
+        sqr[i*i]=1;
+    }
+}
 //end refresh
-
 bool test_case()
 {
-    int n;cin>>n;
-    
-    vector<int> a(n+1,0);
-    
-    for(int i=1; i<=n; i++){
+    int n;
+    cin>>n;
+    bool res=1;
+    for(int i=0; i< n; i++){
         int inp;cin>>inp;
-        a[i]=a[i-1]^inp;
-    }
-    bool res=!a[n];
-    for(int i=1 ; i <= n ; i++){
-        for(int j=i+1; j< n; j++){
-            res |= (a[i]==(a[i]^a[j]) && a[i]==(a[j]^a[n]));
-        }
+        res=res & sqr[inp];
     }
     return res;
-    
 }
 int main()
 {
+    
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
+    
+    setb();
     while(t--)
     {
-        if(test_case()){
+        if(!test_case())
             cout<<"YES\n";
-        }else{
+        else    
             cout<<"NO\n";
-        }
 
     }//end while
     

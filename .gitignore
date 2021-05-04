@@ -7,3 +7,4 @@ output.*
 log.*
 error.*
 *.out
+*.prob
