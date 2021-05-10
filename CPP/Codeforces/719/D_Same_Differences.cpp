@@ -41,48 +41,37 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-bool test_case()
+void test_case()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    bool ans=true;
-    if(s[0] == 'M' || s[n-1] == 'M'){
-        return false;
-    }
-    vector<int> T,M;
-    int pre=0;
-    for(int i=0; i< n; i++){
-        if(s[i]=='M'){
-            M.push_back(i);
+    int n; cin>>n;
+    vector<int> arr(n);
+    map<int,int64_t> b;    
+    for(int i =0 ; i< n ; i++){
+        cin>>arr[i];
+        int bi=arr[i]-i;
+        if(b.find(bi) != b.end()){
+            b[bi]++;
         }else{
-            T.push_back(i);
+            b[bi]=1;
         }
     }
-    if(M.size() != T.size()/2){
-        return false;
-    }
-    for(int i=0 ; i< M.size() ; i++){
-        if(!(T[i] < M[i] && M[i] < T[i+n/3])){
-            ans=false;
-            break;
+    int64_t count=0;
+    for(auto&i : b){
+        if(i.second>1){
+            count+=(i.second*(i.second-1)/2)*1LL;
         }
     }
-
-    return ans;
+    cout<<count<<'\n';
 }
 int main()
 {
+
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
     while(t--)
     {
-        if(test_case())
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        test_case();
 
     }//end while
     

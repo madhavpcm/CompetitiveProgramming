@@ -41,48 +41,44 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-bool test_case()
+void test_case()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    bool ans=true;
-    if(s[0] == 'M' || s[n-1] == 'M'){
-        return false;
-    }
-    vector<int> T,M;
-    int pre=0;
-    for(int i=0; i< n; i++){
-        if(s[i]=='M'){
-            M.push_back(i);
-        }else{
-            T.push_back(i);
-        }
-    }
-    if(M.size() != T.size()/2){
-        return false;
-    }
-    for(int i=0 ; i< M.size() ; i++){
-        if(!(T[i] < M[i] && M[i] < T[i+n/3])){
-            ans=false;
-            break;
-        }
-    }
+    int n; cin>>n;
+    vector<int> a(n);
+    vector<vector<uint64_t>> x(n, vector<uint64_t> (4));
+    for(auto & i : a)cin>>i;
+    int count=0;
 
-    return ans;
+    for(int i=0 ; i< n-1 ; i++){
+        int j=n-1;
+        if(gcd(a[i],a[i+1]) != 1 ){
+            uint64_t lcm = a[i]*a[i+1]/gcd(a[i],a[i+1]);
+            if(a[i+1] != 1)
+                x[count]={i+1ULL,j+1ULL,lcm+gcd(a[i],a[i+1]) , 1ULL*min(a[i]*1LL,a[i+1]*1LL)};
+
+
+            count++;
+        }
+    }
+    for(auto & i : a)cout<<i<<' ';
+    cout<<'\n'<<count<<'\n';
+    for(int i=0 ; i < count ; i++){
+        for(auto &j : x[i]){
+            cout<<j<<' ';
+        }
+        cout<<'\n';
+    }
 }
 int main()
 {
+
+    
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
     while(t--)
     {
-        if(test_case())
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        test_case();
 
     }//end while
     

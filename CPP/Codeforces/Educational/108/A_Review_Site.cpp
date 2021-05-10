@@ -41,36 +41,41 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-bool test_case()
+void test_case()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    bool ans=true;
-    if(s[0] == 'M' || s[n-1] == 'M'){
-        return false;
-    }
-    vector<int> T,M;
-    int pre=0;
-    for(int i=0; i< n; i++){
-        if(s[i]=='M'){
-            M.push_back(i);
-        }else{
-            T.push_back(i);
+    pair<int,int> server1,server2;
+    server1={0,0};
+    server2={0,0};
+    int n;cin>>n;
+    for(int i=0 ; i< n ;i++){
+        int x;cin>>x;
+        switch(x){
+            case 1:
+                    if(server1.first > server2.first){
+                        server1.first++;
+                    }else{
+                        server2.first++;
+                    }
+                    break;
+            case 2:
+                    if(server1.second < server2.second){
+                        server2.second--;
+                    }else{
+                        server1.second--;
+                    }
+                    break;
+            case 3:
+                    if(server1.first + server1.second > server2.first + server2.second){
+                        server1.first++;
+                    }else{
+                        server2.first++;
+                    }
+                    break;
         }
-    }
-    if(M.size() != T.size()/2){
-        return false;
-    }
-    for(int i=0 ; i< M.size() ; i++){
-        if(!(T[i] < M[i] && M[i] < T[i+n/3])){
-            ans=false;
-            break;
-        }
-    }
 
-    return ans;
+    }
+    cout<<server1.first+server2.first<<'\n';
+
 }
 int main()
 {
@@ -79,10 +84,7 @@ int main()
     cin>>t;
     while(t--)
     {
-        if(test_case())
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        test_case();
 
     }//end while
     

@@ -41,36 +41,17 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-bool test_case()
+void test_case()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    bool ans=true;
-    if(s[0] == 'M' || s[n-1] == 'M'){
-        return false;
+    uint64_t a,b;
+    cin>>a>>b;
+    uint64_t gc=gcd(a,b),lcm=a*b/gc;
+    if(b==1){
+        cout<<"NO\n";return;
     }
-    vector<int> T,M;
-    int pre=0;
-    for(int i=0; i< n; i++){
-        if(s[i]=='M'){
-            M.push_back(i);
-        }else{
-            T.push_back(i);
-        }
-    }
-    if(M.size() != T.size()/2){
-        return false;
-    }
-    for(int i=0 ; i< M.size() ; i++){
-        if(!(T[i] < M[i] && M[i] < T[i+n/3])){
-            ans=false;
-            break;
-        }
-    }
+    cout<<"YES\n";
+    cout<<a<<' '<<gc*lcm<<' '<<a+a*b<<'\n';    
 
-    return ans;
 }
 int main()
 {
@@ -79,10 +60,7 @@ int main()
     cin>>t;
     while(t--)
     {
-        if(test_case())
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        test_case();
 
     }//end while
     

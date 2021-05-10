@@ -39,56 +39,72 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
+bool is_palindrome(string &s){
+    int n=s.size();
+    for(int i=0 ; i<n/2; i++){
+        if(s[i]!=s[n-i-1])return false;
+    }
+    return true;
+}
 //end refresh
-bool test_case()
+void test_case()
 {
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    bool ans=true;
-    if(s[0] == 'M' || s[n-1] == 'M'){
-        return false;
+    int a,b;
+    cin>>a>>b;
+    string s;cin>>s;
+    int n = s.size();
+    
+    
+    
+    for(int i =0 ; i< n ; i++){
+        if(s[i]=='?')
+            s[i]=s[n-i-1];
     }
-    vector<int> T,M;
-    int pre=0;
-    for(int i=0; i< n; i++){
-        if(s[i]=='M'){
-            M.push_back(i);
-        }else{
-            T.push_back(i);
+    a-=count(s.begin(),s.end(),'0');
+    b-=count(s.begin(),s.end(),'1');
+    
+    for(int i= 0 ; i<=n/2; i++){
+        if(s[i]=='?' && 2*i != n-1){
+            if(a>1){
+                a-=2;
+                s[i]=s[n-i-1]='0';
+            }else
+            if(b>1){
+                b-=2;
+                s[i]=s[n-i-1]='1';
+            }
         }
-    }
-    if(M.size() != T.size()/2){
-        return false;
-    }
-    for(int i=0 ; i< M.size() ; i++){
-        if(!(T[i] < M[i] && M[i] < T[i+n/3])){
-            ans=false;
-            break;
+        else if(s[i]=='?'){
+            if(a){
+                s[i]='0';
+                a--;
+            }else{
+                s[i]='1';
+                b--;
+            }
         }
+        
     }
-
-    return ans;
+    if(is_palindrome(s) && a==0 && a==b){
+        cout<<s<<'\n';
+    }else{
+        cout<<-1<<'\n';
+    }
 }
 int main()
 {
+
+    
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
     int t;
     cin>>t;
     while(t--)
     {
-        if(test_case())
-            cout<<"YES\n";
-        else
-            cout<<"NO\n";
+        test_case();
 
     }//end while
     
-    #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
-    #endif
+    
     
     return 0;
 }//end main*
