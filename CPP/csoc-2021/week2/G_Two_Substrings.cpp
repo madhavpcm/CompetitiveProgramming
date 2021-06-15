@@ -9,9 +9,8 @@
 #include <map>
 #include <string>
 #include <time.h>
-#include <unordered_map>
-#include <iterator>
-#include <queue>
+
+
 using namespace std;
 #define MOD 1000000007LL
 #define ll long long
@@ -41,36 +40,41 @@ ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
+//end refresh
+bool test_case()
+{
+    string s;cin>>s;
+    if(s.find("AB")==string::npos || s.find("BA")==string::npos){
+        return false;
+    }
+    int ab=s.find("AB"),ba=s.find("BA");
+
+    
+        for(int i=ab+2; i<s.size()-1; i++){
+            if(s[i]=='B' && s[i+1]=='A'){
+                return true;
+            }
+        }
+    
+    
+        for(int i=ba+2; i<s.size()-1; i++){
+            if(s[i]=='A' && s[i+1]=='B'){
+                return true;
+            }
+        }
+    
+    
+    return false;
+}
 int main()
 {   
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int n,q;
-    cin>>n>>q;  
-    vector<vector<int>> apps(n+1);
-    vector<int> ind;
-    set<int> status;
-    int j=0;
 
-    for(int i=0; i<q ;i++){
-        int type,xt;cin>>type>>xt;
- 
-        if(type == 1){
-            ind.push_back(i);
-            apps[xt].push_back(i);
-            status.insert(i);
-        }
-        if(type == 2){
-            for(auto & i :apps[xt]){
-                status.erase(i);
-            }
-            apps[xt].clear();
-        }
-        if(type == 3){
-            for(;j<xt; j++){
-                status.erase(ind[j]);
-            }
-        }
-            cout<<status.size()<<'\n';
+    if(test_case()){
+        cout<<"YES\n";
+    }
+    else{
+        cout<<"NO\n";
     }
     
     #ifdef __linux__

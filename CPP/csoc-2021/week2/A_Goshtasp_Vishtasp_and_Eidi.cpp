@@ -9,9 +9,8 @@
 #include <map>
 #include <string>
 #include <time.h>
-#include <unordered_map>
-#include <iterator>
-#include <queue>
+
+
 using namespace std;
 #define MOD 1000000007LL
 #define ll long long
@@ -41,40 +40,45 @@ ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
-int main()
-{   
-    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int n,q;
-    cin>>n>>q;  
-    vector<vector<int>> apps(n+1);
-    vector<int> ind;
-    set<int> status;
-    int j=0;
-
-    for(int i=0; i<q ;i++){
-        int type,xt;cin>>type>>xt;
- 
-        if(type == 1){
-            ind.push_back(i);
-            apps[xt].push_back(i);
-            status.insert(i);
-        }
-        if(type == 2){
-            for(auto & i :apps[xt]){
-                status.erase(i);
-            }
-            apps[xt].clear();
-        }
-        if(type == 3){
-            for(;j<xt; j++){
-                status.erase(ind[j]);
+//end refresh
+std::vector<ull> sieve(ull n)
+{
+    std::vector<ull> AllPrimes(100000,1);
+    AllPrimes[0]=AllPrimes[1]=0;
+    for(ull i =0 ; i< n ; i++){
+        if(AllPrimes[i]){
+            for (ull j = i*i ; j < n ;j+=i){
+                AllPrimes[j]=0;
             }
         }
-            cout<<status.size()<<'\n';
     }
+    return AllPrimes;
+}
+
+int main()
+{
     
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    int x;cin>>x;int temp=x;
+    vector<ull> all=sieve(100000);
+    vector<int> numbers;
+    string s;all[1]=1;
+    if(all[x]){
+        cout<<x<<'='<<x;return 0;
+    }
+    for(int i=x; i>=1 && temp>0;i--){
+        if(all[i]){
+            s+=(to_string(i)+'+'); 
+            temp-=i;
+            i=temp;   
+            i++;
+        }
+    }
+    s[s.size()-1]='=';
+    s+=to_string(x);
+    cout<<s;
     #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    //cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
     #endif
     
     return 0;

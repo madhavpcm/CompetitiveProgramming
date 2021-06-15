@@ -9,9 +9,9 @@
 #include <map>
 #include <string>
 #include <time.h>
-#include <unordered_map>
-#include <iterator>
-#include <queue>
+#include <limits.h>
+
+
 using namespace std;
 #define MOD 1000000007LL
 #define ll long long
@@ -41,37 +41,49 @@ ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
+//end refresh
+void test_case()
+{
+    int n;cin>>n;
+    vector<int> a(n);
+    for(auto &i :a )cin>>i;
+    int maxdif=*max_element(a.begin(),a.end())-*min_element(a.begin(),a.end());
+    uint32_t maxp=0;
+    while(maxdif){
+        maxdif/=2;
+        maxp++;
+    }uint32_t res=UINT32_MAX;
+    vector<pair<int,int>> dec;
+    for(int i=0; i< n; i++){
+        int start=i,end=i;
+        while(a[i]>a[i+1] && i<n-1){
+            i++;
+        };  
+        if(start<i)
+            dec.push_back({start,i});//inlcusive
+    }
+    for(auto &i : dec){
+        int64_t diff=a[i.first]-a[i.second];
+        uint32_t p=1;uint32_t c=0;
+        while(diff>0){
+            diff-=p;
+            p*=2;c++;
+        }
+        res=min(c,res);
+    }
+
+    cout<<res%UINT32_MAX<<'\n';
+}
 int main()
 {   
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int n,q;
-    cin>>n>>q;  
-    vector<vector<int>> apps(n+1);
-    vector<int> ind;
-    set<int> status;
-    int j=0;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        test_case();
 
-    for(int i=0; i<q ;i++){
-        int type,xt;cin>>type>>xt;
- 
-        if(type == 1){
-            ind.push_back(i);
-            apps[xt].push_back(i);
-            status.insert(i);
-        }
-        if(type == 2){
-            for(auto & i :apps[xt]){
-                status.erase(i);
-            }
-            apps[xt].clear();
-        }
-        if(type == 3){
-            for(;j<xt; j++){
-                status.erase(ind[j]);
-            }
-        }
-            cout<<status.size()<<'\n';
-    }
+    }//end while
     
     #ifdef __linux__
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";

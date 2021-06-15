@@ -9,9 +9,8 @@
 #include <map>
 #include <string>
 #include <time.h>
-#include <unordered_map>
-#include <iterator>
-#include <queue>
+#include <limits.h>
+
 using namespace std;
 #define MOD 1000000007LL
 #define ll long long
@@ -40,38 +39,68 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
+uint32_t selsort(string& s){
+    if(!s.size())
+        return 0;
+    for(auto & i : s){
+        if(i=='.'){
+            i='1';
+        }else{
+            i='0';
+        }
+    }
+    int pos;
+    uint32_t res=0;
+    for(int i=0; i< s.size()-1; i++){
+        pos=i;
+        for(int j=i+1; j< s.size(); j++){
+            if(s[j] < s[pos])
+                pos=j;
+        }
+        if(pos!=i){
+            swap(s[i], s[pos]);res+=(pos-i+1);
+        }
+    }
+    return res;
+}
+//end refresh
+void test_case()
+{
+    int n; cin>>n; 
+    string s; cin>>s;
+    
+    int beg=s.find('.');int end=s.rfind('.');
+    int steps=INT_MAX; int pos=-1;
+    for(int i=0; i< n; i++){
 
+        if(s[i]== '.'){
+            string left(s.begin(), s.begin()+i);
+            string right(s.begin()+i+1, s.end());
+            uint32_t st=selsort(left)+selsort(right) ;
+            if(st< steps){
+                steps=st;
+                pos=i;
+            }
+        }
+        //cout<<sub<<' ';
+
+    }
+    if(pos<0){
+        cout<<0<<'\n';
+    }else{
+        cout<<steps%INT_MAX<<'\n';
+    }
+}
 int main()
 {   
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int n,q;
-    cin>>n>>q;  
-    vector<vector<int>> apps(n+1);
-    vector<int> ind;
-    set<int> status;
-    int j=0;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        test_case();
 
-    for(int i=0; i<q ;i++){
-        int type,xt;cin>>type>>xt;
- 
-        if(type == 1){
-            ind.push_back(i);
-            apps[xt].push_back(i);
-            status.insert(i);
-        }
-        if(type == 2){
-            for(auto & i :apps[xt]){
-                status.erase(i);
-            }
-            apps[xt].clear();
-        }
-        if(type == 3){
-            for(;j<xt; j++){
-                status.erase(ind[j]);
-            }
-        }
-            cout<<status.size()<<'\n';
-    }
+    }//end while
     
     #ifdef __linux__
     cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
