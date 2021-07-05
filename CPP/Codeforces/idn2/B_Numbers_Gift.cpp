@@ -9,8 +9,8 @@
 #include <map>
 #include <string>
 #include <time.h>
-
-
+ 
+ 
 using namespace std;
 #define MOD 1000000007LL
 #define ll long long
@@ -32,57 +32,52 @@ using namespace std;
 #define DB(x) cout<<"\n"<<#x<<" = "<<(x)<<"\n";
 #define CL(a,b) memset(a,b,sizeof(a))
 #define GOLD ((1+sqrt(5))/2)
-
+ 
 const double PI=3.14159265358979323846264338327950288419716939937510582097494459230;
 void swaps (char *x,char *y){char temp;temp=*x;*x=*y;*y=temp;}
 void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
-//end refresh
-std::vector<ull> sieve(ull n)
+ 
+bool isgood(int64_t n)
 {
-    std::vector<ull> AllPrimes(100000,1);
-    AllPrimes[0]=AllPrimes[1]=0;
-    for(ull i =0 ; i< n ; i++){
-        if(AllPrimes[i]){
-            for (ull j = i*i ; j < n ;j+=i){
-                AllPrimes[j]=0;
-            }
+    for(int64_t i=2; i*i<=n; i+= 1){
+        if(!(n%(i*i))) {
+            return false;
+ 
         }
     }
-    return AllPrimes;
+    return true;
 }
-
 int main()
 {
-  int n,k,c,p;
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    int64_t n;
     cin>>n;
-    c=n;
-    k=0;
-    while (c>0){
-        for(int i =c; i>0 ; i--){
-            p=0;
-            for (int j = 2; j < i-1; j++)
-            {
-                if (i%j==0){
-                    p=1;
-                    break;
-                }
-            }
-            if (p==0){
-                if (k==1){
-                    cout<<"+";
-                    k=1;
-                    c=c-i;
-                    cout<<i;
-                    break;
-                }
+    for(int64_t i=1; i*i<=n; i++){
+        if(!(n%i)){
+            if(isgood(n/i)){
+                cout<<n/i;return 0;
+                #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
             }
         }
     }
-    cout<<"= "<<n<<endl;
+    for(int64_t i=sqrt(n); i>=0; i--){
+        if(!(n%i)){
+            if(isgood(i)){
+                cout<<i;return 0;
+                #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+            }
+        }
+    }
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
     return 0;
-
 }//end main*

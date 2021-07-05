@@ -9,7 +9,7 @@
 #include <map>
 #include <string>
 #include <time.h>
-
+#include <queue>
 
 using namespace std;
 #define MOD 1000000007LL
@@ -41,48 +41,24 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-std::vector<ull> sieve(ull n)
-{
-    std::vector<ull> AllPrimes(100000,1);
-    AllPrimes[0]=AllPrimes[1]=0;
-    for(ull i =0 ; i< n ; i++){
-        if(AllPrimes[i]){
-            for (ull j = i*i ; j < n ;j+=i){
-                AllPrimes[j]=0;
-            }
-        }
-    }
-    return AllPrimes;
-}
 
 int main()
 {
-  int n,k,c,p;
-    cin>>n;
-    c=n;
-    k=0;
-    while (c>0){
-        for(int i =c; i>0 ; i--){
-            p=0;
-            for (int j = 2; j < i-1; j++)
-            {
-                if (i%j==0){
-                    p=1;
-                    break;
-                }
-            }
-            if (p==0){
-                if (k==1){
-                    cout<<"+";
-                    k=1;
-                    c=c-i;
-                    cout<<i;
-                    break;
-                }
-            }
-        }
-    }
-    cout<<"= "<<n<<endl;
-    return 0;
+    
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    int n,k;cin>>n>>k;
+    deque<int> q;
+    for(int i=0; i< k; i++){
+        int x; cin>>x;
+        while (!q.empty() && q.back() > x)
+            q.pop_back();
+        q.push_back(x);
+        int m=q.front();
 
+    }
+    #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
+    #endif
+    
+    return 0;
 }//end main*
