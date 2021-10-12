@@ -8,3 +8,4 @@ log.*
 error.*
 *.out
 *.prob
+.cph
