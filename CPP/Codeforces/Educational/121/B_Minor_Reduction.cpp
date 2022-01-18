@@ -39,29 +39,41 @@ void swapi(int *a,int *b){int temp;temp=*a;*a=*b;*b=temp;}
 ull gcd(ull a,ull b){if(a==0)return b;if(b==0)return a;if(a==1||b==1)return 1;
 if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
-
-//end refresh
-int test_case()
-{
-    int a,b,c;
-    cin>>a>>b>>c;
-
-    int aa,bb,cc;
-    aa=b-(c-b);
-    if(aa >= a && aa%a == 0 && aa)
-        return 1;
-
-    bb = a + (c-a)/2;
-    if(bb >= b && bb%b == 0 && (c-a)%2 ==0 && bb)
-        return 1;
-
-    cc = a + (b-a)*2;
-    if(cc >= c && cc%c == 0 && cc)
-        return 1;
+bool isMore(string&a , string&b){
+    if(a.size() > b.size())
+        return true;
+    if(a.size() < b.size()) 
+        return false;
     
-    return 0;
+    for(int i=0; i< a.size(); i++){
+        if(a[i] > b[i])
+            return true;
+        if(a[i] < b[i])
+            return false;
+    }
+    
+    return true;
 }
-
+//end refresh
+void test_case()
+{
+    string s;
+    cin>>s;
+    int ind=0;
+    for(int i=0; i< s.size()-1; i++){
+        int x= (s[i]-'0')+(s[i+1]-'0');
+        if(x>=10){
+            ind =i;
+        }
+    }
+    if(ind>=0){
+        cout<<string(s.begin(), s.begin()+ind) << s[ind+1]-'0' + s[ind]-'0' << string(s.begin()+ind+2, s.end());
+    }
+    else{
+        cout<<string(s.begin(), s.begin()+ind) << s[ind+1]-'0' + s[ind]-'0' << string(s.begin()+ind+2, s.end());
+    }
+    cout<<'\n';
+}
 int main()
 {
     #ifdef __linux__
@@ -72,16 +84,12 @@ int main()
     cin>>t;
     while(t--)
     {
-        if (test_case()){
-            cout<<"YES\n";
-        }
-        else{
-            cout<<"NO\n";
-        }
+        test_case();
 
     }//end while
     
     #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
     #endif
     
     return 0;

@@ -41,27 +41,33 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-int test_case()
+void test_case()
 {
-    int a,b,c;
-    cin>>a>>b>>c;
-
-    int aa,bb,cc;
-    aa=b-(c-b);
-    if(aa >= a && aa%a == 0 && aa)
-        return 1;
-
-    bb = a + (c-a)/2;
-    if(bb >= b && bb%b == 0 && (c-a)%2 ==0 && bb)
-        return 1;
-
-    cc = a + (b-a)*2;
-    if(cc >= c && cc%c == 0 && cc)
-        return 1;
-    
-    return 0;
+    int n,k;
+    cin>>n>>k;
+    if( n%2 == 0 ) {
+        if(k > n/2){
+            cout << "-1\n";
+            return;
+        }
+    }
+    if(n%2 == 1){
+        if(k > n/2+1){
+            cout<<"-1\n";
+            return;
+        }
+    }
+    std::vector<std::string> a(n,std::string(n,'.'));
+    int c=1;int c1=1;
+    int c2=1;
+    int j=0;
+    for(int i=0; i< n && j < k; i=i+2){
+        a[i][i] = 'R';
+        j++;
+    }
+    for(auto& i : a)
+        cout<<i<<'\n';
 }
-
 int main()
 {
     #ifdef __linux__
@@ -72,12 +78,7 @@ int main()
     cin>>t;
     while(t--)
     {
-        if (test_case()){
-            cout<<"YES\n";
-        }
-        else{
-            cout<<"NO\n";
-        }
+        test_case();
 
     }//end while
     

@@ -5,6 +5,7 @@
 #include <numeric>
 #include <vector>
 #include <stdint.h>
+#include <climits>
 #include <set>
 #include <map>
 #include <string>
@@ -49,6 +50,15 @@ void test_case()
     for(auto& i : arr)
         cin>>i;
 
+    map<int,int> m;
+    int res = -1;
+    for(int i=0; i< n; i++) {
+        if(m[arr[i]] != 0){
+            res = max(res, m[arr[i]] + (n-i-1));
+        }
+        m[arr[i]] = i+1;
+    }
+    cout<<res<<'\n';
     
 }
 int main()

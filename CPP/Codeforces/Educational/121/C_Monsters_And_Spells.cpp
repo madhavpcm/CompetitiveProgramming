@@ -41,30 +41,25 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-int test_case()
+void test_case()
 {
-    int a,b,c;
-    cin>>a>>b>>c;
-
-    int aa,bb,cc;
-    aa=b-(c-b);
-    if(aa >= a && aa%a == 0 && aa)
-        return 1;
-
-    bb = a + (c-a)/2;
-    if(bb >= b && bb%b == 0 && (c-a)%2 ==0 && bb)
-        return 1;
-
-    cc = a + (b-a)*2;
-    if(cc >= c && cc%c == 0 && cc)
-        return 1;
-    
-    return 0;
+    int n;
+    cin>>n;
+    vector<pair<int,int>> kh(n);
+    for(auto &i : kh)
+        cin>>i.first;
+    for(auto &i : kh)
+        cin>>i.second;
+    vector<vector<int>> dp(101,vector<int>(101)) ;
+    for(int i=0; i< n ; i++){
+        
+    }
 }
-
 int main()
 {
     #ifdef __linux__
+    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+    freopen("log.txt", "w", stderr);
     #endif
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
@@ -72,16 +67,12 @@ int main()
     cin>>t;
     while(t--)
     {
-        if (test_case()){
-            cout<<"YES\n";
-        }
-        else{
-            cout<<"NO\n";
-        }
+        test_case();
 
     }//end while
     
     #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
     #endif
     
     return 0;

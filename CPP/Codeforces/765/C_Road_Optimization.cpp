@@ -41,47 +41,47 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 #define SIZE 1000001
 
 //end refresh
-int test_case()
+void test_case()
 {
-    int a,b,c;
-    cin>>a>>b>>c;
-
-    int aa,bb,cc;
-    aa=b-(c-b);
-    if(aa >= a && aa%a == 0 && aa)
-        return 1;
-
-    bb = a + (c-a)/2;
-    if(bb >= b && bb%b == 0 && (c-a)%2 ==0 && bb)
-        return 1;
-
-    cc = a + (b-a)*2;
-    if(cc >= c && cc%c == 0 && cc)
-        return 1;
+    int n,l,k;
+    cin>>n>>l>>k;
+    vector<int> a(n);
+    vector<int> d(n+1);
+    d[n]=l;
+    for(int i=0;i< n ; i++){
+        cin>>d[i];
+    }
+    for(int i=0;i< n ; i++){
+        cin>>a[i];
+    }
     
-    return 0;
-}
 
+    vector<int> eff(n);
+    for(int i=0 ; i<= n;i++){
+        eff[i] = a[i]*(d[i+1]-d[i]);
+    }
+    sort(eff.begin(), eff.end());
+    int ans =0;
+    for(int i=0; i <= k;i++){
+        ans+=eff[i];
+    }
+    cout<<ans<<'\n';
+}
 int main()
 {
     #ifdef __linux__
     #endif
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int t;
-    cin>>t;
+    int t=1;
     while(t--)
     {
-        if (test_case()){
-            cout<<"YES\n";
-        }
-        else{
-            cout<<"NO\n";
-        }
+        test_case();
 
     }//end while
     
     #ifdef __linux__
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
     #endif
     
     return 0;
