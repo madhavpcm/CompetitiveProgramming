@@ -43,23 +43,30 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
-    int n;
-    cin>>n;
-    vector<pair<int,int>> kh(n);
-    for(auto &i : kh)
-        cin>>i.first;
-    for(auto &i : kh)
-        cin>>i.second;
-    vector<vector<int>> dp(101,vector<int>(101)) ;
-    for(int i=0; i< n ; i++){
-        kh[i]
+    int n,m;
+    cin>>n>>m;
+    int mn = n/2 + m/2;
+    int mx =m-1 + n-1;
+    int m_ = max(1,m-1);
+    int n_ = max(1,n-1);
+    int k=0;
+    for(int i=0; i< n*m-1; i++){
+        if(i < m_ * n_)
+            cout<<mn<<' ';
+        else if( i> m_ * n_ && i < 2*m_ + 2*n_) {
+            if(k < 2)
+                cout<<mn+1<<' ';
+            else
+                cout<<mn;
+            
+        }
+        else
+            
     }
 }
 int main()
 {
     #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
     #endif
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

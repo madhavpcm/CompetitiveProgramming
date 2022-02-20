@@ -43,23 +43,47 @@ if(a==b)return a;if(a>b)return gcd(b,a%b);else return gcd(a,b%a);}
 //end refresh
 void test_case()
 {
-    int n;
-    cin>>n;
-    vector<pair<int,int>> kh(n);
-    for(auto &i : kh)
-        cin>>i.first;
-    for(auto &i : kh)
-        cin>>i.second;
-    vector<vector<int>> dp(101,vector<int>(101)) ;
-    for(int i=0; i< n ; i++){
-        kh[i]
+    int n,m,r,c;
+    cin>>n>>m>>r>>c;
+    vector<string> arr(n);
+    int flag =0;
+    int sr=0;
+    for(auto& i : arr){
+        cin>>i;
+        if(i.find('B')!=string::npos) 
+            flag=1;
+        sr+=count(i.begin(),i.end(),'B');
+    }
+    if(!flag){
+        cout<<"-1\n";
+        return;
+    }
+    int steps=0;
+    string col;
+    for (int i = 0; i < n; i++)
+    {
+        col.push_back(arr[i][c - 1]);
+    }
+    if(arr[r-1][c-1] != 'B'){
+        if(arr[r-1].find('B')!=string::npos){
+            cout<<"1\n";
+            return;
+        }
+        if(col.find("B") !=string::npos){
+            cout<<"1\n";
+            return;
+        }
+        cout<<"2\n";
+        return;
+    }
+    else{
+        cout<<"0\n";
+        return;
     }
 }
 int main()
 {
     #ifdef __linux__
-    freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-    freopen("log.txt", "w", stderr);
     #endif
     
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
@@ -72,7 +96,6 @@ int main()
     }//end while
     
     #ifdef __linux__
-    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n";
     #endif
     
     return 0;
